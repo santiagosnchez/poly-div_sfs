@@ -112,5 +112,46 @@ For **divergence** estimates by site-class separation, specify an outgroup to th
 
     perl poly+div_sfs.pl -f example_Coding_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_jack2 -o out  -v -c
 
+Note how the number of replacement sites `S_n` is higher than silent sites `S_s`. We can further exlude some of the noise from the data by exluding singleton sites.
+
+    perl poly+div_sfs.pl -f example_Coding_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_jack2 -o out  -v -c -F 1
+
+By default "stop" codons are exluded from the analysis. However, a count of the number of codon sites found is reported for quality control.
+
+### Multi-gene/locus data
+
+If alignments of multiple genes or genomic regions are available, they can be run on a `bash` loop.
+
+First, let's create a list of the different species.
+
+    cat example_WholeGene_Amanita_scaffold-0.g11.fasta | grep "^>" | sed -E 's/>|__.*//g' | sort | uniq > spp.txt
     
+Then, generate duplicates of the same data as if they were from different genes.
+
+    mkdir multi
+    for i in {1..10}; do cp example_WholeGene_Amanita_scaffold-0.g11.fasta multi/gene_${i}.fas; done
+
+Then do a loop for each gene. Let's make an array of all the gene names, and then loop using the indeces:
+
+    list=(`ls multi`)
+    for i in ${!list[@]}; do 
+        if [[ $i == 0 ]]; then 
+            perl poly+div_sfs.pl -f multi/${list[$i]} -s jacksonii:sp_F11:sp_T31:sp_jack1:sp_jack2:sp_jack3:sp_jack5 -v; 
+        else 
+            perl poly+div_sfs.pl -f multi/${list[$i]} -s jacksonii:sp_F11:sp_T31:sp_jack1:sp_jack2:sp_jack3:sp_jack5 
+        fi 
+    done
+
+# References
+
+Campos, J. L., Halligan, D. L., Haddrill, P. R., & Charlesworth, B. (2014). The relation between recombination rate and patterns of molecular evolution and variation in Drosophila melanogaster. Molecular Biology and Evolution, 31(4), 1010–1028. http://doi.org/10.1093/molbev/msu056
+
+Ronen, R., Udpa, N., Halperin, E., & Bafna, V. (2013). Learning Natural Selection from the Site Frequency Spectrum. Genetics, 195(1), 181–. http://doi.org/10.1534/genetics.113.152587
+
+Sánchez-Ramírez, S., Tulloss, R. E., Guzmán-Dávalos, L., Cifuentes-Blanco, J., Valenzuela, R., Estrada-Torres, A., et al. (2015). In and out of refugia: historical patterns of diversity and demography in the North American Caesar's mushroom species complex. Molecular Ecology, 24(23), 5938–5956. http://doi.org/10.1111/mec.13413
+
+
+
+
+
 
