@@ -3,11 +3,11 @@ Estimates polymorphism and divergence parameters from FASTA alignments
 
 This Perl script can estimate polymorphism and divergence summary statistics from a fasta alignment. It will separate synonymous and nonsynonymous sites if the alignment is for coding sequences. You can control for reading frames with the -r argument, and provide one or multiple outgroups with the -o argument. In sites with more than two alleles, the two most frequent ones are considered, while the least frequent one is ignored. All estimates are based on site frequency spectra (SFS). For an example see Ronen et al. (2013) and Campos et al. (2014). It will also print SFS for all, synonymous, and nonsynonymous sites if the -S 1/s/n argument is given. If an outgroup is provided the SFS will be unfolded. The most recent version also outputs estimates for 4-fold sites, and calculates the codon adaptation index (CAI).
 
-# Installation
+## Installation
 
 Start by downloading the script:
 
-    wget https://raw.githubusercontent.com/santiagosnchez/poly-div_sfs.pl/master/poly%2Bdiv_sfs.pl
+    wget -Nq https://raw.githubusercontent.com/santiagosnchez/poly-div_sfs.pl/master/poly%2Bdiv_sfs.pl
     
 Then run it with the `-h` (help) flag:
 
@@ -53,8 +53,51 @@ You should see:
                      -S 0[1:s:n]         [optional]   Only print the site frequency spectrum. If -o is given the SFS will be unfolded.
                                                       If used in combination with -c, it will print SFS for synonymous(s) or replacement(n) sites.
 
+If you wish to have the script accessible from any location, you can do:
 
-# Running the program
+    chmod +x poly+div_sfs.pl
+    sudo cp poly+div_sfs.pl /usr/local/bin
 
+## Running the program
 
+The example file includes protein-coding sequences (e.g. no introns) for 7 *Amanita* species in the *Amanita jacksonii* complex (Sánchez-Ramírez et al. 2015). The sampling includes multiple individuals per species.
+
+To get **diversity** estimates simply speficy the file and the name tag of a species that matches **all** records of the headers in that group.
+
+    perl poly+div_sfs.pl -f example_Amanita_scaffold-0.g11.fasta -s jacksonii
+
+Results in:
+
+    example_Amanita_scaffold-0.g11.fasta,jacksonii,44,137,0.00974,0.00269,-2.63807,0.03774
+
+As you can see, the results are in CSV format, and includes the name of the file, the species, the number of haplotyes, etc.
+
+To see, what each field means, run with the `-v` verbose argument.
+
+    perl poly+div_sfs.pl -f example_Amanita_scaffold-0.g11.fasta -s jacksonii -v
+    # Reading frame is 0 + 1
+    Gene,Pop,N,S,Theta,Pi,TajimasD,Psing
+    example_Amanita_scaffold-0.g11.fasta,jacksonii,44,137,0.00974,0.00269,-2.63807,0.03774
+    
+Now you have more information and headers for each field.
+
+### Multiple species/populations
+
+If you want estimates for different populations or species, you simply need to provide a list of the species you want in the `-s` argument.
+
+    perl poly+div_sfs.pl -f example_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_F11:sp_T31:sp_jack2 -v
+    
+### Site-class (synonymous/nonsynonymous) separation
+
+Simply add the `-c` argument.
+
+    perl poly+div_sfs.pl -f example_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_F11:sp_T31:sp_jack2 -v -c
+
+### Divergence
+
+For divergence estimates, specify an outgroup to the `-o` argument.
+
+    perl poly+div_sfs.pl -f example_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_F11:sp_T31:sp_jack2 -o  -v -c
+
+    
 
