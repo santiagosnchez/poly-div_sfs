@@ -45,7 +45,7 @@ perl poly+div.pl -f your_fasta_file  [required]   FASTA file alignment
                  -v                  [optional]   Verbose mode
                  -t 3[0.5]           [optional]   Sample size threshold for segregating sites. Could be specified through
                                                   an integer or a fraction of N. Will exclude sites with insufficient data.
-                 -F 1[0.04]          [optional]   Will exclude sites with minor allele frequency specified with am integer or a 
+                 -F 1[0.04]          [optional]   Will exclude sites with minor allele frequency specified with an integer or a 
                                                   fraction of N.
                  -r 1[2]             [optional]   Start reading frame in a position other than 0 (or 1st frame). The default is 0.
                  -S 0[1:s:n]         [optional]   Only print the site frequency spectrum. If -o is given the SFS will be unfolded.
