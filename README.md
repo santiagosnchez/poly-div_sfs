@@ -23,7 +23,7 @@ If you encounter this error:
     Can't locate Statistics/ChisqIndep.pm in @INC (you may need to install the Statistics::ChisqIndep module) (@INC contains: /usr/local/Cellar/perl/5.24.1/lib/perl5/site_perl/5.24.1/darwin-thread-multi-2level /usr/local/Cellar/perl/5.24.1/lib/perl5/site_perl/5.24.1 /usr/local/Cellar/perl/5.24.1/lib/perl5/5.24.1/darwin-thread-multi-2level /usr/local/Cellar/perl/5.24.1/lib/perl5/5.24.1 /usr/local/lib/perl5/site_perl/5.24.1 .) at poly+div_sfs.pl line 18.
     BEGIN failed--compilation aborted at poly+div_sfs.pl line 18.
 
-You will need to install the `Statistics::ChisqIndep.pm` module. You can easily do this uing `cpanm`. On Mac OSX you can use `brew` to install `cpanm`:
+You will need to install the `ChisqIndep.pm` module. You can easily do this uing `cpanm`. On Mac OSX you can use `brew` to install `cpanm`:
 
     brew install cpanm
     
