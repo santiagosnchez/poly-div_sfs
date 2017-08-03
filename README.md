@@ -5,12 +5,17 @@ This Perl script can estimate polymorphism and divergence summary statistics fro
 
 ## Installation
 
-Start by downloading the script:
+Start by downloading the repository:
+
+    git clone https://github.com/santiagosnchez/poly-div_sfs
+    
+You can also just download the script with:
 
     wget -Nq https://raw.githubusercontent.com/santiagosnchez/poly-div_sfs.pl/master/poly%2Bdiv_sfs.pl
     
-Then run it with the `-h` (help) flag:
+Go to the `poly-div_sfs` dirctory and run the script with the `-h` (help) flag:
 
+    cd poly-div_sfs
     perl poly+div_sfs.pl -h
 
 If you encounter this error:
@@ -74,10 +79,10 @@ As you can see, the results are in CSV format, and includes the name of the file
 
 To see, what each field means, run with the `-v` verbose argument.
 
-    perl poly+div_sfs.pl -f example_Amanita_scaffold-0.g11.fasta -s jacksonii -v
+    perl poly+div_sfs.pl -f example_WholeGene_Amanita_scaffold-0.g11.fasta -s jacksonii -v
     # Reading frame is 0 + 1
     Gene,Pop,N,S,Theta,Pi,TajimasD,Psing
-    example_Amanita_scaffold-0.g11.fasta,jacksonii,44,137,0.00974,0.00269,-2.63807,0.03774
+    example_WholeGene_Amanita_scaffold-0.g11.fasta,jacksonii,44,137,0.00974,0.00269,-2.63807,0.03774
     
 Now you have more information and headers for each field.
 
@@ -85,19 +90,27 @@ Now you have more information and headers for each field.
 
 If you want estimates for different populations or species, you simply need to provide a list of the species you want in the `-s` argument.
 
-    perl poly+div_sfs.pl -f example_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_F11:sp_T31:sp_jack2 -v
-    
+    perl poly+div_sfs.pl -f example_WholeGene_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_F11:sp_T31:sp_jack2 -v
+
+### Divergence
+
+By providing an outgroup `-o` you can estimate **divergence**-based statistics. By default the Kimura-2-parameter distance will be calculated.
+
+    perl poly+div_sfs.pl -f example_WholeGene_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_jack2 -o sp_F11 -v
+
+If multiple sequences match the outgroup tag, either the sequence with least missing data or one at random will be picked.
+
 ### Site-class (synonymous/nonsynonymous) separation
 
 Simply add the `-c` argument.
 
-    perl poly+div_sfs.pl -f example_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_F11:sp_T31:sp_jack2 -v -c
+    perl poly+div_sfs.pl -f example_Coding_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_F11:sp_T31:sp_jack2 -v -c
 
-### Divergence
+### Divergence at silent and replacement sites
 
-For divergence estimates, specify an outgroup to the `-o` argument.
+For **divergence** estimates by site-class separation, specify an outgroup to the `-o` argument together with the `-c` argument.
 
-    perl poly+div_sfs.pl -f example_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_F11:sp_T31:sp_jack2 -o  -v -c
+    perl poly+div_sfs.pl -f example_WholeGene_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_jack2 -o sp_F11  -v -c
 
     
 
