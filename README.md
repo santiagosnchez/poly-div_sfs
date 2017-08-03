@@ -1,7 +1,7 @@
 # poly-div_sfs.pl
 Estimates polymorphism and divergence parameters from FASTA alignments
 
-This Perl script can estimate polymorphism and divergence summary statistics from a fasta alignment. It will separate synonymous and nonsynonymous sites if the alignment is for coding sequences. You can control for reading frames with the -r argument, and provide one or multiple outgroups with the -o argument. In sites with more than two alleles, the two most frequent ones are considered, while the least frequent one is ignored. All estimates are based on site frequency spectra (SFS). For an example see [Ronen et al. (2013)](#References) and [Campos et al. (2014)](#References). It will also print SFS for all, synonymous, and nonsynonymous sites if the -S 1/s/n argument is given. If an outgroup is provided the SFS will be unfolded. The most recent version also outputs estimates for 4-fold sites, and calculates the codon adaptation index (CAI).
+This Perl script can estimate polymorphism and divergence summary statistics from a fasta alignment. It will separate synonymous and nonsynonymous sites if the alignment is for coding sequences. You can control for reading frames with the -r argument, and provide one or multiple outgroups with the -o argument. In sites with more than two alleles, the two most frequent ones are considered, while the least frequent one is ignored. All estimates are based on site frequency spectra (SFS). For an example see [Ronen et al. (2013)](# References) and [Campos et al. (2014)](# References). It will also print SFS for all, synonymous, and nonsynonymous sites if the -S 1/s/n argument is given. If an outgroup is provided the SFS will be unfolded. The most recent version also outputs estimates for 4-fold sites, and calculates the codon adaptation index (CAI).
 
 ## Installation
 
@@ -65,7 +65,7 @@ If you wish to have the script accessible from any location, you can do:
 
 ## Running the program
 
-The example file includes protein-coding sequences (e.g. no introns) for 7 *Amanita* species in the *Amanita jacksonii* complex ([Sánchez-Ramírez et al. 2015](#References)). The sampling includes multiple individuals per species.
+The example file includes protein-coding sequences (e.g. no introns) for 7 *Amanita* species in the *Amanita jacksonii* complex ([Sánchez-Ramírez et al. 2015](# References)). The sampling includes multiple individuals per species.
 
 To get **diversity** estimates simply speficy the file and the name tag of a species that matches **all** records of the headers in that group.
 
