@@ -35,6 +35,8 @@ if (grep { /^-he{0,1}l{0,1}p{0,1}$/ } @ARGV){
 Try:
 perl poly+div_sfs.pl -h
 
+TEST!!!!!
+
 perl poly+div.pl -f your_fasta_file  [required]   FASTA file alignment
                  -s sp1[:sp2:sp3]    [optional]   Header tags that can distinguish between populations/species
                  -e id1[:id2:id3]    [optional]   Exclude sequences based on header tags
