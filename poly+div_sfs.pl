@@ -33,18 +33,20 @@ my $start_frame=0;
 if (grep { /^-he{0,1}l{0,1}p{0,1}$/ } @ARGV){
 	die "
 Try:
+perl poly+div_sfs.pl -h
+
 perl poly+div.pl -f your_fasta_file  [required]   FASTA file alignment
-            	 -s sp1[:sp2:sp3]    [optional]   Header tags that can distinguish between populations/species
-            	 -e id1[:id2:id3]    [optional]   Exclude sequences based on header tags
+                 -s sp1[:sp2:sp3]    [optional]   Header tags that can distinguish between populations/species
+                 -e id1[:id2:id3]    [optional]   Exclude sequences based on header tags
                  -c                  [optional]	  Takes the alignment as inframe coding sequences
-	                                              producing estimates for synonymous and nonsynonymous sites
+                                                  producing estimates for synonymous and nonsynonymous sites
                  -o spX[:spY:spZ]    [optional]   Invokes MKT and specifies outgroup(s) of each species in the -s array labels.
                                                   If multiple sequences are found it will take only one sequence; the one with less missing data.
                  -v                  [optional]   Verbose mode
                  -t 3[0.5]           [optional]   Sample size threshold for segregating sites. Could be specified through
-	                                              an integer or a fraction of N. Will exclude sites with insufficient data.
-				 -F 1[0.04]          [optional]   Will exclude sites with minor allele frequency specified with am integer or a 
-				                                  fraction of N.
+                                                  an integer or a fraction of N. Will exclude sites with insufficient data.
+                 -F 1[0.04]          [optional]   Will exclude sites with minor allele frequency specified with am integer or a 
+                                                  fraction of N.
                  -r 1[2]             [optional]   Start reading frame in a position other than 0 (or 1st frame). The default is 0.
                  -S 0[1:s:n]         [optional]   Only print the site frequency spectrum. If -o is given the SFS will be unfolded.
                                                   If used in combination with -c, it will print SFS for synonymous(s) or replacement(n) sites. 
