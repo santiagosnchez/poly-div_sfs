@@ -52,7 +52,7 @@ You should see:
                      -v                  [optional]   Verbose mode
                      -t 3[0.5]           [optional]   Sample size threshold for segregating sites. Could be specified through
                                                       an integer or a fraction of N. Will exclude sites with insufficient data.
-                     -F 1[0.04]          [optional]   Will exclude sites with minor allele frequency specified with am integer or a 
+                     -F 1[0.04]          [optional]   Will exclude sites with minor allele frequency specified with an integer or a 
                                                       fraction of N.
                      -r 1[2]             [optional]   Start reading frame in a position other than 0 (or 1st frame). The default is 0.
                      -S 0[1:s:n]         [optional]   Only print the site frequency spectrum. If -o is given the SFS will be unfolded.
@@ -110,7 +110,7 @@ Simply add the `-c` argument.
 
 For **divergence** estimates by site-class separation, specify an outgroup to the `-o` argument together with the `-c` argument.
 
-    perl poly+div_sfs.pl -f example_WholeGene_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_jack2 -o sp_F11  -v -c
+    perl poly+div_sfs.pl -f example_Coding_Amanita_scaffold-0.g11.fasta -s jacksonii:sp_jack2 -o out  -v -c
 
     
 
