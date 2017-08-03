@@ -198,8 +198,12 @@ if (scalar(@out) != 0){
 	if (scalar(@out) > 1){
 		if (scalar(@spp) == scalar(@out)){
 			for my $i (0 .. $#out){
-				my @tmpout = grep { /$out[0]/ } @labels;
-				$matchOut{$spp[$i]} = $tmpout[getbest(@tmpout)];
+				my @tmpout = grep { /$out[$i]/ } @labels;
+				if (scalar(@tmpout) == 0){
+					die "outgroup $out[$i] was not found\n";
+				} else {
+					$matchOut{$spp[$i]} = $tmpout[getbest(@tmpout)];
+				}
 			}
 		} else {
 			die "the legth of arrays in -s and -o is not equal\n";
@@ -208,17 +212,27 @@ if (scalar(@out) != 0){
 	elsif (scalar(@out) == 1){
 		if (scalar(@spp) > 1){
 			my @tmpout = grep { /$out[0]/ } @labels;
-			for my $i (0 .. $#spp){
-				$matchOut{$spp[$i]} = $tmpout[getbest(@tmpout)];
+			if (scalar(@tmpout) == 0){
+				die "outgroup $out[0] was not found\n";
+			} else {
+				for my $i (0 .. $#spp){
+					$matchOut{$spp[$i]} = $tmpout[getbest(@tmpout)];
+				}
 			}
 		}
 		elsif (scalar(@spp) == 1){
 			my @tmpout = grep { /$out[0]/ } @labels;
-			$matchOut{$spp[0]} = $tmpout[getbest(@tmpout)];
+			if (scalar(@tmpout) == 0){
+				die "outgroup $out[0] was not found\n";
+			} else {
+				$matchOut{$spp[0]} = $tmpout[getbest(@tmpout)];
+			}
 		}
 		else {
 			my @tmpout = grep { /$out[0]/ } @labels;
-			if (scalar(@tmpout) == 1){
+			if (scalar(@tmpout) == 0){
+				die "outgroup $out[0] was not found\n";
+			} elsif (scalar(@tmpout) == 1){
 				$outone = $tmpout[0];
 			} else {
 				sort {$a cmp $b} @tmpout;
